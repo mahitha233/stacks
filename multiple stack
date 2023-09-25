@@ -1,0 +1,95 @@
+#include <stdio.h>
+
+#define MAX_SIZE 100
+
+int topA = -1; // Initialize top of stack A
+int topB = MAX_SIZE; // Initialize top of stack B
+int stack[MAX_SIZE]; // The array for storing elements
+
+// Function to check if stack A is empty
+int isEmpty_A() {
+    return topA == -1;
+}
+
+// Function to check if stack B is empty
+int isEmpty_B() {
+    return topB == MAX_SIZE;
+}
+
+// Function to push an element onto stack A
+void push_A(int X) {
+    if (topA == topB - 1) {
+        printf("STACK A OVERFLOW\n");
+    } else {
+        topA = topA + 1;
+        stack[topA] = X;
+    }
+}
+
+// Function to push an element onto stack B
+void push_B(int Y) {
+    if (topB - 1 == topA) {
+        printf("STACK B OVERFLOW\n");
+    } else {
+        topB = topB - 1;
+        stack[topB] = Y;
+    }
+}
+
+// Function to pop an element from stack A
+int pop_A() {
+    if (isEmpty_A()) {
+        printf("STACK A UNDERFLOW\n");
+        return -1; // Return a special value to indicate underflow
+    } else {
+        int value = stack[topA];
+        topA = topA - 1;
+        return value;
+    }
+}
+
+// Function to pop an element from stack B
+int pop_B() {
+    if (isEmpty_B()) {
+        printf("STACK B UNDERFLOW\n");
+        return -1; // Return a special value to indicate underflow
+    } else {
+        int value = stack[topB];
+        topB = topB + 1;
+        return value;
+    }
+}
+
+int main() {
+    // Example usage
+    push_A(11); // Push 11 onto stack A
+    push_B(22); // Push 22 onto stack B
+
+    // Pop elements from stack A
+    int value1 = pop_A();
+    int value2 = pop_A();
+
+    // Pop elements from stack B
+    int value3 = pop_B();
+    int value4 = pop_B();
+
+    // Print the popped values
+    printf("Popped from stack A: %d, %d\n", value1, value2);
+    printf("Popped from stack B: %d, %d\n", value3, value4);
+
+    return 0;
+}
+In this code:
+
+isEmpty_A and isEmpty_B functions check if stack A and stack B are empty, respectively.
+
+push_A and push_B functions push elements onto stack A and stack B, respectively, with overflow checks.
+
+pop_A and pop_B functions pop elements from stack A and stack B, respectively, with underflow checks. They return a special value (e.g., -1) to indicate underflow.
+
+In the main function, I've included example usage of pushing and popping elements from both stacks and printed the popped values. You can modify this part as needed to test the operations.
+
+
+
+
+
