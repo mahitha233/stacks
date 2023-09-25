@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include <ctype.h>
 #define MAX_SIZE 100
 
 struct Stack {
@@ -53,41 +53,46 @@ void infixToPostfix(char infix[], char postfix[]) {
 
     for (i = 0; infix[i] != '\0'; i++) {
         char ch = infix[i];
-
-        if (isalnum(ch)) {
+        if (isalnum(ch)) 
+        {
             postfix[j++] = ch;
         } else if (ch == '(') {
             push(&stack, ch);
         } else if (ch == ')') {
-            while (!isEmpty(&stack) && stack.items[stack.top] != '(') {
+            while (!isEmpty(&stack) && stack.items[stack.top] != '(') 
+            {
                 postfix[j++] = pop(&stack);
             }
-            if (!isEmpty(&stack) && stack.items[stack.top] != '(') {
+            if (!isEmpty(&stack) && stack.items[stack.top] != '(') 
+            {
                 printf("Error: Invalid Expression\n");
                 exit(1);
-            } else {
+            } else 
+            {
                 pop(&stack);
             }
-        } else {
-            while (!isEmpty(&stack) && getPrecedence(ch) <= getPrecedence(stack.items[stack.top])) {
+        } 
+        else 
+        {
+            while (!isEmpty(&stack) && getPrecedence(ch) <= getPrecedence(stack.items[stack.top])) 
+            {
                 postfix[j++] = pop(&stack);
             }
             push(&stack, ch);
         }
     }
-
-    while (!isEmpty(&stack)) {
+    while (!isEmpty(&stack)) 
+    {
         postfix[j++] = pop(&stack);
     }
 
     postfix[j] = '\0';
 }
-
 int main() {
     char infix[MAX_SIZE], postfix[MAX_SIZE];
 
     printf("Enter an infix expression: ");
-    gets(infix);
+    scanf("%s", infix);
 
     infixToPostfix(infix, postfix);
 
@@ -95,3 +100,4 @@ int main() {
 
     return 0;
 }
+
